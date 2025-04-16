@@ -1,9 +1,13 @@
 pub mod bitcoin_client;
+pub mod client_wallet;
+pub mod bitcoin_keys;
+
+use client_wallet::WalletContext;
 
 fn main() {
-    if let Err(e) = bitcoin_client::generate_wallet() {
-        eprintln!("Error generating wallet: {}", e);
-        std::process::exit(1);
-    }
-    println!("Wallet generated successfully!");
+    let from = "Enter your from address here";
+    let wallet = WalletContext::new(None);
+    wallet.get_balance();
+    let to = "Enter your to address here";
+    wallet.send_coins(to, 100);
 }
